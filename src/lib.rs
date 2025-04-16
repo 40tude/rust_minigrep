@@ -1,3 +1,19 @@
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn one_result() {
+        let query = "duct";
+        let content = "\
+Rust:
+safe, fast, productive.
+Pick three.";
+
+        assert_eq!(vec!["safe, fast, productive."], search(query, content));
+    }
+}
+
 use std::error::Error;
 use std::fs;
 
@@ -24,6 +40,12 @@ impl Config {
 // run will return a type that implement the Error trait but we don't specify the particular type
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     let contents = fs::read_to_string(config.file_path)?;
-    println!("With text :\n{contents}");
+    // println!("With text :\n{contents}");
     Ok(()) // wrap the unit type () in the OK()
+}
+
+// explicite lifetime is mandatory to specify that the return value is a string slice that references
+// slices of the argument contents (not query)
+pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
+    vec![]
 }
