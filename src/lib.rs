@@ -47,5 +47,12 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
 // explicite lifetime is mandatory to specify that the return value is a string slice that references
 // slices of the argument contents (not query)
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    vec![]
+    let mut results = Vec::new();
+
+    for line in contents.lines() {
+        if line.contains(query) {
+            results.push(line);
+        }
+    }
+    results
 }
