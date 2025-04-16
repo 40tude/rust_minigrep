@@ -13,8 +13,8 @@ fn main() {
         process::exit(1);
     });
 
-    println!("Searching for {}", config.query);
-    println!("In file {}", config.file_path);
+    // println!("Searching for {}", config.query);
+    // println!("In file {}", config.file_path);
 
     // prefix the run with lib crate name
     if let Err(e) = minigrep::run(config) {
