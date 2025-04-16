@@ -9,7 +9,7 @@ fn main() {
     // if Result is an OK value, .unwrap_or_else() returns the inner value wrapped by Ok
     // On Err value, the closure gets called
     let config = Config::build(&args).unwrap_or_else(|err| {
-        println!("Problem parsing arguments : {err}"); // see the content of Err in Config::build()
+        eprintln!("Problem parsing arguments : {err}"); // see the content of Err in Config::build()
         process::exit(1);
     });
 
@@ -18,7 +18,7 @@ fn main() {
 
     // prefix the run with lib crate name
     if let Err(e) = minigrep::run(config) {
-        println!("Application error : {e}");
+        eprintln!("Application error : {e}");
         process::exit(1);
     }
 }

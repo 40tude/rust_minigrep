@@ -1,3 +1,6 @@
+// $Env:IGNORE_CASE=1; cargo run -- to poem.txt
+// Remove-Item Env:IGNORE_CASE
+
 #[cfg(test)]
 mod test {
     use super::*;
