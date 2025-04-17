@@ -4,11 +4,13 @@ use std::process;
 use minigrep::Config; // bring the Config type from the lib crate into the binary scope
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
+    // let args: Vec<String> = env::args().collect();
 
     // if Result is an OK value, .unwrap_or_else() returns the inner value wrapped by Ok
     // On Err value, the closure gets called
-    let config = Config::build(&args).unwrap_or_else(|err| {
+    // let config = Config::build(&args).unwrap_or_else(|err| {
+    // env::args() returns an iterator and we pass ownership of the iterator to Config::build()
+    let config = Config::build(env::args()).unwrap_or_else(|err| {
         eprintln!("Problem parsing arguments : {err}"); // see the content of Err in Config::build()
         process::exit(1);
     });
